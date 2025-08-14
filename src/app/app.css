@@ -1,5 +1,18 @@
 .wrap {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   width: 1250px;
+  margin: 88px 20% 0 20%;
+  background: white;
 }
+
+.field{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #9a9a9a;
+  z-index: 1000;
+  padding: 10px;
+}
+

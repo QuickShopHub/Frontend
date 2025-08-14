@@ -1,14 +1,12 @@
 import {Component, inject, signal} from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import {ProductCard} from './product-card/product-card';
 import {CardService} from './data/services/cardService';
-import {HttpClient} from '@angular/common/http';
-import {JsonPipe} from '@angular/common';
+import {SearchField} from './search-field/search-field';
 
 
 @Component({
   selector: 'app-root',
-  imports: [ProductCard],
+  imports: [ProductCard, SearchField],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -20,7 +18,11 @@ export class App {
   cards: ApiResponse | undefined;
 
   constructor() {
-    this.cardService.getProducts().subscribe(val => {
+  }
+
+  public search(query: string) {
+    this.cards = undefined;
+    this.cardService.getProducts(query).subscribe(val => {
       this.cards = val;
     });
   }

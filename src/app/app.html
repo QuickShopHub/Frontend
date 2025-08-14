@@ -1,14 +1,15 @@
+
 <div class="field">
+  <app-search-field></app-search-field>
 </div>
 
 
 <div class="wrap">
-  @if (cards && cards._embedded?.productForSearchList) {
+  @if (cards && cards._embedded.productForSearchList) {
     @for (card of cards._embedded.productForSearchList; track card.id) {
       <app-product-card
-      [card]="card"
+        [card]="card"
       ></app-product-card>
     }
   }
 </div>
-
