@@ -1,11 +1,8 @@
 .card-wrapper {
-  background-color: #f5f5f5;
+  background-color: #eaeaea;
   width: 250px;
   height: 400px;
   padding: 10px 10px 10px 10px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
   border-radius: 12px;
   overflow: hidden;
   margin: 4px;
@@ -22,7 +19,7 @@
   line-height: 1.5;
   font-weight: 400;
   color: #333;
-  background-color: #f5f5f5; /* светло-серый фон */
+  background-color: #eaeaea;
   border-radius: 12px;
 }
 .image {

@@ -9,7 +9,7 @@ import {QueryDTO} from '../DTO/query.interface';
 export class CardService {
   http = inject(HttpClient)
 
-  queryDTO = new QueryDTO("хлопок", 10, 0)
+  queryDTO = new QueryDTO("футболка", 10, 0)
 
   private apiKey = '47264f69a6b8ef732a4b688529cae4b6beb658dda349998125563209ab10493f'
 
@@ -20,6 +20,6 @@ export class CardService {
       `Bearer ${this.apiKey}`
     );
 
-    return this.http.post('/search/api/query', this.queryDTO, { headers })
+    return this.http.post<ApiResponse>('/search/api/query', this.queryDTO, { headers })
   }
 }

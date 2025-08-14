@@ -1,7 +1,14 @@
-<div class="wrap">
-  <app-product-card></app-product-card>
+<div class="field">
 </div>
 
-<pre>
-  {{ cards | json }}
-</pre>
+
+<div class="wrap">
+  @if (cards && cards._embedded?.productForSearchList) {
+    @for (card of cards._embedded.productForSearchList; track card.id) {
+      <app-product-card
+      [card]="card"
+      ></app-product-card>
+    }
+  }
+</div>
+

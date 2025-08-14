@@ -1,6 +1,6 @@
 {
   "/search": {
-    "target": "https://localhost:8081",
+    "target": "https://26.144.26.116:8081",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug",

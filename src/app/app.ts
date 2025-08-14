@@ -5,9 +5,10 @@ import {CardService} from './data/services/cardService';
 import {HttpClient} from '@angular/common/http';
 import {JsonPipe} from '@angular/common';
 
+
 @Component({
   selector: 'app-root',
-  imports: [ProductCard, JsonPipe],
+  imports: [ProductCard],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -16,7 +17,7 @@ export class App {
 
   cardService = inject(CardService);
 
-  cards: any  = []
+  cards: ApiResponse | undefined;
 
   constructor() {
     this.cardService.getProducts().subscribe(val => {
