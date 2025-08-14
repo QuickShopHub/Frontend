@@ -3,3 +3,21 @@
   grid-template-columns: repeat(5, 1fr);
   width: 1250px;
 }
+.products-not-found {
+  background-color: #b3b3b3;
+  display: inline-grid;
+  grid-template-columns: 2fr 7fr;
+  padding: 16px;
+  margin: 0;
+  border-radius: 12px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.cart {
+  width: 50%;
+  height: 50%;
+  fill: #333333;
+}

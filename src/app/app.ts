@@ -4,11 +4,12 @@ import {ProductCard} from './product-card/product-card';
 import {CardService} from './data/services/cardService';
 import {HttpClient} from '@angular/common/http';
 import {JsonPipe} from '@angular/common';
+import {ProductPage} from './product-page/product-page';
 
 
 @Component({
   selector: 'app-root',
-  imports: [ProductCard],
+  imports: [ProductCard, ProductPage],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
