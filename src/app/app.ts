@@ -2,6 +2,9 @@ import {Component, inject, signal} from '@angular/core';
 import {ProductCard} from './product-card/product-card';
 import {CardService} from './data/services/cardService';
 import {SearchField} from './search-field/search-field';
+import {HttpClient} from '@angular/common/http';
+import {JsonPipe} from '@angular/common';
+import {ProductPage} from './product-page/product-page';
 
 
 @Component({
