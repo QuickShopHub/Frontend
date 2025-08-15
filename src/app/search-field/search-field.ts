@@ -1,6 +1,7 @@
 import {Component, inject} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {App} from '../app';
+import {SearchPage} from '../pages/search-page/search-page';
 
 @Component({
   selector: 'app-search-field',
@@ -14,10 +15,10 @@ export class SearchField {
 
   query: string = '';
 
-  app = inject(App)
+  search_page = inject(SearchPage)
 
   search(){
-    this.app.search(this.query)
+    this.search_page.search(this.query)
   }
 
 }
