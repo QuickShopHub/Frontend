@@ -7,5 +7,14 @@
     "pathRewrite": {
       "^/search": ""
     }
+  },
+  "/user": {
+    "target": "https://26.144.26.116:8444",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/user": ""
+    }
   }
 }

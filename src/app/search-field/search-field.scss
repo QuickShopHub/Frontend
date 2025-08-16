@@ -108,6 +108,14 @@ input:focus{
   width: 80px;
   max-width: 80px;
   min-width: 80px;
+  cursor: pointer;
+
+  &.active{
+    background-color: rgb(0, 144, 255);
+    border-radius: 15px;
+
+  }
+
 }
 
 .basket{
@@ -128,8 +136,15 @@ input:focus{
   cursor: pointer;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
+.dropdown-menu{
+  cursor: pointer;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
+.username {
+  max-width: 80px;
+  overflow: hidden; /* Скрывает переполнение */
+  text-overflow: ellipsis; /* Добавляет "..." в конце, если текст длиннее */
+  white-space: nowrap; /* Запрещает перенос строк */
+}
