@@ -29,7 +29,6 @@ export class SigninBlock {
       //@ts-ignore
       this.authService.signup(this.form.value).subscribe(
         (value) => {
-          // Успешный ответ
           this.authService.token = value.token;
           if (value.user!= null && value.token != null) {
             this.authService.user = new User(value.user.id, value.user.username, value.user.password, value.user.email, value.user.admin, value.user.created_at);
@@ -43,8 +42,8 @@ export class SigninBlock {
             this.loginPage.errorMessage = "Email занят";
           }
           else{
-            alert(errorMessage);
-
+            this.form.reset();
+            this.loginPage.errorMessage = "Ошибка";
           }
         }
       )
