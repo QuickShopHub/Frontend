@@ -1,0 +1,55 @@
+
+
+.main {
+  background: #101010;
+  min-height: 100vh;
+}
+
+
+.wrap {
+  padding-left: 20px;
+  padding-top: 20px;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(4, 270px);
+  column-gap: 50px;
+  width: 1250px;
+  margin: 88px 18% 0 18%;
+  background: #636363;
+}
+.products-not-found {
+  position: relative;
+  top: 200px;
+  left: 300px;
+  background-color: #b3b3b3;
+  display: inline-grid;
+  grid-template-columns: 2fr 7fr;
+  padding: 16px;
+  margin: 0;
+  border-radius: 12px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.cart {
+  width: 50%;
+  height: 50%;
+  fill: #333333;
+}
+
+.field{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #9a9a9a;
+  z-index: 1000;
+  padding: 10px;
+}
+
+
+.card{
+  cursor: pointer;
+}
