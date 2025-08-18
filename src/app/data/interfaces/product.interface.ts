@@ -4,7 +4,7 @@ interface ForCustomer {
   description: string
   price: number
   article: string
-  quantity: number
+  quantity: number //кол-во на складе
   active: boolean
   createdAt: string
   idVendor: string
