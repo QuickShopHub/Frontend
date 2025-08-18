@@ -16,19 +16,21 @@ import {Router} from '@angular/router';
   styleUrl: './search-field.scss'
 })
 export class SearchField {
-
+  router = inject(Router);
   auth = inject(AuthService);
   isAuth = false;
-  constructor(private router: Router) {
+  constructor() {
     this.isAuth = this.auth.token != null;
   }
 
   query: string = '';
 
-  search_page = inject(SearchPage)
+
 
   search(){
-    this.search_page.search(this.query)
+    this.router.navigate(['/find'], {
+      queryParams: { query: this.query }
+    });
   }
   isOpen = false
 

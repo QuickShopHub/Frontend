@@ -11,4 +11,5 @@ interface ForCustomer {
   rating: number
   countGrades: number
   quantitySold: number
+  countComments: number
 }

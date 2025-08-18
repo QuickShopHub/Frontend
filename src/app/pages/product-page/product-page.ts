@@ -1,10 +1,14 @@
 import {Component, inject} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, Router, RouterOutlet} from '@angular/router';
+import {SearchField} from '../../search-field/search-field';
 
 @Component({
   selector: 'app-product-page',
-  imports: [],
+  imports: [
+    RouterOutlet,
+    SearchField
+  ],
   templateUrl: './product-page.html',
   styleUrl: './product-page.scss'
 })
@@ -17,7 +21,7 @@ export class ProductPage {
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      console.log('params');
+
       const id = params['id'];
       const url = params['url'];
       if (id) {
@@ -28,8 +32,9 @@ export class ProductPage {
 
   public createCard(id:string, url:string):void {
     this.url = url;
-    this.http.get<ForCustomer>(`/product/api/products/id?id=${id}`).subscribe(res => {
-      this.data = res;
+    this.http.get<ForCustomer[]>(`/product/api/products/id?id=${id}`).subscribe(res => {
+      this.data = res[0];
     });
+    console.log(this.url)
   }
 }

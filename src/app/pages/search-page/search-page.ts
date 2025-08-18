@@ -3,7 +3,7 @@ import {ProductCard} from "../../product-card/product-card";
 import {SearchField} from "../../search-field/search-field";
 import {CardService} from '../../data/services/cardService';
 import {ProductPage} from '../product-page/product-page';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-search-page',
@@ -19,8 +19,18 @@ export class SearchPage {
   cardService = inject(CardService);
 
   cards: ApiResponse | undefined;
-
+  route: ActivatedRoute = inject(ActivatedRoute);
   constructor() {
+  }
+
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+
+      const query = params['query'];
+      if (query) {
+        this.search(query);
+      }
+    });
   }
 
   public search(query: string) {
