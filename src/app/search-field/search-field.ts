@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, Input} from '@angular/core';
 import {FormBuilder, FormsModule} from '@angular/forms';
 import {App} from '../app';
 import {SearchPage} from '../pages/search-page/search-page';
@@ -19,11 +19,23 @@ export class SearchField {
   router = inject(Router);
   auth = inject(AuthService);
   isAuth = false;
+
+  @Input() searchText: string | undefined;
+
+
   constructor() {
     this.isAuth = this.auth.token != null;
   }
 
   query: string = '';
+
+
+  ngOnInit() {
+    // Инициализируем query значением searchText, если оно определено
+    if (this.searchText) {
+      this.query = this.searchText;
+    }
+  }
 
 
 

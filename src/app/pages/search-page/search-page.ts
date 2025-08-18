@@ -23,11 +23,14 @@ export class SearchPage {
   constructor() {
   }
 
+  searchQuery: string = "";
+
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
 
       const query = params['query'];
       if (query) {
+        this.searchQuery = query;
         this.search(query);
       }
     });

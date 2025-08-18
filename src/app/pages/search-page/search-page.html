@@ -1,7 +1,7 @@
 
 <div class="main">
   <div class="field">
-    <app-search-field></app-search-field>
+    <app-search-field [searchText]="searchQuery"></app-search-field>
   </div>
   @if (cards && cards._embedded.productForSearchList) {
     <div class="wrap">

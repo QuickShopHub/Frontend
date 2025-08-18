@@ -6,7 +6,6 @@ import {SearchField} from '../../search-field/search-field';
 @Component({
   selector: 'app-product-page',
   imports: [
-    RouterOutlet,
     SearchField
   ],
   templateUrl: './product-page.html',
@@ -16,12 +15,13 @@ export class ProductPage {
   url: string | null = null;
   data: ForCustomer | null = null;
   http:HttpClient = inject(HttpClient);
+  card: Product | null = null;
 
   route: ActivatedRoute = inject(ActivatedRoute);
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-
+      console.log('Query params:', params); // Логируем параметры для отладки
       const id = params['id'];
       const url = params['url'];
       if (id) {
@@ -35,6 +35,5 @@ export class ProductPage {
     this.http.get<ForCustomer[]>(`/product/api/products/id?id=${id}`).subscribe(res => {
       this.data = res[0];
     });
-    console.log(this.url)
   }
 }
