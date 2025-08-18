@@ -7,5 +7,5 @@ import {Component, Input} from '@angular/core';
   styleUrl: './product-card.scss'
 })
 export class ProductCard {
-  @Input() card! : ProductToSearch;
+  @Input() card! : Product;
 }

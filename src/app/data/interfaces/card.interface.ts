@@ -1,4 +1,4 @@
-interface ProductToSearch {
+interface Product {
   id: string;
   name: string;
   description: string;
@@ -11,7 +11,7 @@ interface ProductToSearch {
 }
 
 interface ProductSearchList {
-  productForSearchList: ProductToSearch[];
+  productForSearchList: Product[];
 }
 
 interface Page {

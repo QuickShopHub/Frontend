@@ -2,8 +2,6 @@ import {Component, inject} from '@angular/core';
 import {ProductCard} from "../../product-card/product-card";
 import {SearchField} from "../../search-field/search-field";
 import {CardService} from '../../data/services/cardService';
-import {ProductPage} from '../product-page/product-page';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-search-page',
@@ -16,22 +14,20 @@ import {Router} from '@angular/router';
 })
 export class SearchPage {
   cardService = inject(CardService);
-  productPage = inject(ProductPage);
 
+  cards: ApiResponse | undefined;
 
-  card: ApiResponse | undefined;
-
-  constructor(private router: Router) {}
+  constructor() {
+  }
 
   public search(query: string) {
-    this.card = undefined;
+    this.cards = undefined;
     this.cardService.getProducts(query).subscribe(val => {
-      this.card = val;
+      this.cards = val;
     });
   }
 
-  public getCard(card: ProductToSearch) {
-    this.productPage.createPage(card.id, card.url);
-    this.router.navigate(['/product'])
+  public getCard(card: Product) {
+    console.log(card.id);
   }
 }

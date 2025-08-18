@@ -3,9 +3,9 @@
   <div class="field">
     <app-search-field></app-search-field>
   </div>
-  @if (card && card._embedded.productForSearchList) {
+  @if (cards && cards._embedded.productForSearchList) {
     <div class="wrap">
-      @for (card of card._embedded.productForSearchList; track card.id) {
+      @for (card of cards._embedded.productForSearchList; track card.id) {
         <app-product-card class="card" (click)="getCard(card)"
                           [card]="card"
         ></app-product-card>
