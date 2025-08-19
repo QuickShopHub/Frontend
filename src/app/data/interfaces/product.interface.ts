@@ -13,3 +13,9 @@ interface ForCustomer {
   quantitySold: number
   countComments: number
 }
+
+interface miniPhoto {
+  id: string
+  url: string
+  product_id: string
+}

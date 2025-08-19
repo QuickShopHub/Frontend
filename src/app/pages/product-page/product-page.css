@@ -13,10 +13,12 @@
   grid-template-columns: 4fr 4fr 3fr;
   max-width: 1200px;
   width: 100%;
-  margin: 110px auto;
-  padding: 0 16px;
+  margin: 110px auto 5px auto;
+  padding: 5px 16px;
   box-sizing: border-box;
   gap: 10px;
+  background-color: #dbf3f6;
+  border-radius: 10px;
 }
 
 .wrap {
@@ -76,6 +78,27 @@
 
 h2 {
   margin: 5px 0 5px 0;
+}
+
+.dopInfo {
+  display: grid;
+  grid-template-columns: 37% 63%;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto 5px auto;
+}
+
+.miniPhoto {
+  border-radius: 10px;
+  background-color: #e6e6e6;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+}
+
+.comments {
+  background-color: #25a13e;
 }
 
 /*# sourceMappingURL=product-page.css.map */

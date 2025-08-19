@@ -56,4 +56,18 @@
       </div>
     </div>
   </div>
+
+  <div class="dopInfo">
+    <div class="miniPhoto">
+      @if(photosUrl){
+        @for(urlMiniPhoto of photosUrl; track urlMiniPhoto.id){
+          <app-mini-photo
+          [url]="urlMiniPhoto.url"
+          ></app-mini-photo>
+        }
+      }
+    </div>
+    <div class="comments">1</div>
+  </div>
+
 }
