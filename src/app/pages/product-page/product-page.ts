@@ -1,7 +1,8 @@
 import {Component, inject} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {ActivatedRoute, Router, RouterOutlet} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {SearchField} from '../../search-field/search-field';
+import {SearchFieldService} from '../../data/services/searchFieldService';
 
 @Component({
   selector: 'app-product-page',
@@ -15,13 +16,11 @@ export class ProductPage {
   url: string | null = null;
   data: ForCustomer | null = null;
   http:HttpClient = inject(HttpClient);
-  card: Product | null = null;
 
   route: ActivatedRoute = inject(ActivatedRoute);
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      console.log('Query params:', params); // Логируем параметры для отладки
       const id = params['id'];
       const url = params['url'];
       if (id) {

@@ -10,10 +10,8 @@ export class CardService {
   http = inject(HttpClient)
 
 
-
-
-  getProducts(query:string){
-    const queryDTO = new QueryDTO(query, 10, 0)
+  getProducts(query:string, page:number){
+    const queryDTO = new QueryDTO(query, 24, page-1)
     return this.http.post<ApiResponse>('/search/api/query', queryDTO)
   }
 }

@@ -1,10 +1,9 @@
 import {Component, inject, Input} from '@angular/core';
-import {FormBuilder, FormsModule} from '@angular/forms';
-import {App} from '../app';
-import {SearchPage} from '../pages/search-page/search-page';
-import {NgClass, NgIf} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {NgIf} from '@angular/common';
 import {AuthService} from '../auth/auth-service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {SearchFieldService} from '../data/services/searchFieldService';
 
 @Component({
   selector: 'app-search-field',
@@ -19,6 +18,8 @@ export class SearchField {
   router = inject(Router);
   auth = inject(AuthService);
   isAuth = false;
+  searchFieldService = inject(SearchFieldService);
+  route: ActivatedRoute = inject(ActivatedRoute);
 
   @Input() searchText: string | undefined;
 
@@ -31,15 +32,21 @@ export class SearchField {
 
 
   ngOnInit() {
-    // Инициализируем query значением searchText, если оно определено
+    this.route.queryParams.subscribe(params => {
+      this.searchFieldService.query = params['query'];
+      if(!this.searchFieldService.query){
+        this.searchFieldService.query = localStorage.getItem('query')
+      }
+    })
     if (this.searchText) {
       this.query = this.searchText;
+    } else if(this.searchFieldService.query != null) {
+      this.query = this.searchFieldService.query;
     }
   }
 
-
-
   search(){
+    this.searchFieldService.query = this.query;
     this.router.navigate(['/find'], {
       queryParams: { query: this.query }
     });

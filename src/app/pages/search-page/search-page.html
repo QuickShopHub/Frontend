@@ -1,16 +1,25 @@
 
 <div class="main">
   <div class="field">
-    <app-search-field [searchText]="searchQuery"></app-search-field>
+    <app-search-field ></app-search-field>
   </div>
-  @if (cards && cards._embedded.productForSearchList) {
-    <div class="wrap">
-      @for (card of cards._embedded.productForSearchList; track card.id) {
-        <app-product-card class="card" (click)="getCard(card)"
-                          [card]="card"
-        ></app-product-card>
-      }
+  @if (cards) {
+    <div class="body">
+      <div class="wrap">
+        @for (card of cards; track card.id) {
+          <app-product-card class="card" (click)="getCard(card)"
+                            [card]="card"
+          ></app-product-card>
+        }
+
+      </div>
+      <div class="bot">
+        <img src="assets/images/back.png" (click)="back()" class="img1" alt="">
+        <div class="value"><input [(ngModel)]="page" (keyup.enter)="setPage()" maxlength="100000000"></div>
+        <img src="assets/images/forward.png" (click)="forward()" class="img2" alt="">
+      </div>
     </div>
+
   } @else {
     <div class="products-not-found">
       <div>

@@ -11,5 +11,5 @@ export const routes: Routes = [
       {path: 'sign_up', component: SigninBlock},
     ]},
   {path: 'find', component: SearchPage},
-  {path: 'product', component: ProductPage}
+  {path: 'result', component: ProductPage}
 ];

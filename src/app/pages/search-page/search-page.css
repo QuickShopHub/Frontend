@@ -3,16 +3,24 @@
   min-height: 100vh;
 }
 
-.wrap {
+.body {
   padding-left: 20px;
   padding-top: 20px;
   min-height: 100vh;
-  display: grid;
-  grid-template-columns: repeat(4, 270px);
-  column-gap: 50px;
   width: 1250px;
   margin: 88px 18% 0 18%;
   background: #636363;
+  display: grid;
+  grid-template-rows: auto auto;
+  justify-items: center;
+}
+
+.wrap {
+  display: grid;
+  grid-template-columns: repeat(4, 270px);
+  column-gap: 50px;
+  row-gap: 20px;
+  width: 100%;
 }
 
 .products-not-found {
@@ -49,6 +57,39 @@
 
 .card {
   cursor: pointer;
+}
+
+.bot {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-content: center;
+  width: 100px;
+  column-gap: 10px;
+  align-content: center;
+}
+
+img {
+  width: 30px;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.value {
+  display: grid;
+  align-content: center;
+}
+
+.value input {
+  width: 20px;
+  border-radius: 3px;
+  border: none;
+  text-align: center;
+}
+
+.value input:focus {
+  outline: none;
 }
 
 /*# sourceMappingURL=search-page.css.map */
