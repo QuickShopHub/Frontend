@@ -84,8 +84,20 @@
 
       </div>
       }
-
-      <div class="comments"></div>
+      @if(displayedComments){
+        <div class="comments">
+          @for(com of displayedComments; track com.id){
+            <app-comment
+              [comment]="com"
+            ></app-comment>
+          }
+        </div>
+      }
+      @if(maxComm < this.comments.length){
+      <div class="showMore" (click)="showMore()">
+        Далее
+      </div>
+      }
 
     </div>
   </div>

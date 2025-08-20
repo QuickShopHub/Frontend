@@ -13,11 +13,13 @@
         }
 
       </div>
-      <div class="bot">
+      @if(result!.page!.totalElements > result!.page.size){
+      <footer class="bot">
         <img src="assets/images/back.png" (click)="back()" class="img1" alt="">
         <div class="value"><input [(ngModel)]="page" (keyup.enter)="setPage()" maxlength="100000000"></div>
         <img src="assets/images/forward.png" (click)="forward()" class="img2" alt="">
-      </div>
+      </footer>
+      }
     </div>
 
   } @else {

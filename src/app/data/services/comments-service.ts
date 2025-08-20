@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {NewCommentDTO} from '../DTO/NewCommentDTO';
 import {AuthService} from '../../auth/auth-service';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,5 +17,9 @@ export class CommentsService {
         "Authorization": `Bearer ${this.auth.token}`
       }
     }).subscribe();
+  }
+
+  public getAllComments(id: string) {
+    return this.http.get<CommentData[]>(`/comment/api/comments?id=${id}`);
   }
 }

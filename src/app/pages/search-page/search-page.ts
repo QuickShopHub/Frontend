@@ -2,9 +2,7 @@ import {Component, inject} from '@angular/core';
 import {ProductCard} from "../../product-card/product-card";
 import {SearchField} from "../../search-field/search-field";
 import {CardService} from '../../data/services/cardService';
-import {ProductPage} from '../product-page/product-page';
 import {ActivatedRoute, Router} from '@angular/router';
-import {SearchFieldService} from '../../data/services/searchFieldService';
 import {FormsModule} from '@angular/forms';
 
 @Component({
@@ -43,6 +41,8 @@ export class SearchPage {
       if (query) {
         this.searchQuery = query;
         this.search(query, this.page);
+      }else {
+        this.cards = null
       }
     });
   }
@@ -51,7 +51,12 @@ export class SearchPage {
     this.result = undefined;
     this.cardService.getProducts(query, page).subscribe(val => {
       this.result = val;
-      this.cards = this.result!._embedded.productForSearchList
+      if(this.result.page.totalElements == 0){
+        this.cards = null
+      }
+      else {
+        this.cards = this.result!._embedded.productForSearchList
+      }
     });
 
   }

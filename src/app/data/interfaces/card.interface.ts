@@ -32,3 +32,15 @@ interface ApiResponse {
   _links: Links;
   page: Page;
 }
+
+
+
+interface CommentData {
+   id: string;
+   comment: string;
+   userId: string;
+   createdAt: string;
+   productId: string;
+   countLikes: number;
+   username: string;
+}

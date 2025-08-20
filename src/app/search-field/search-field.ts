@@ -3,7 +3,7 @@ import {FormsModule} from '@angular/forms';
 import {NgIf} from '@angular/common';
 import {AuthService} from '../auth/auth-service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {SearchFieldService} from '../data/services/searchFieldService';
+
 
 @Component({
   selector: 'app-search-field',
@@ -18,7 +18,6 @@ export class SearchField {
   router = inject(Router);
   auth = inject(AuthService);
   isAuth = false;
-  searchFieldService = inject(SearchFieldService);
   route: ActivatedRoute = inject(ActivatedRoute);
 
   @Input() searchText: string | undefined;
@@ -28,20 +27,20 @@ export class SearchField {
     this.isAuth = this.auth.token != null;
   }
 
-  query: string = '';
+  query: string = "";
 
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      this.searchFieldService.query = params['query'];
-      if(!this.searchFieldService.query){
-        this.searchFieldService.query = localStorage.getItem('query')
+      this.query = params['query'];
+      if(!this.query){
+        if(localStorage.getItem("query") != null){
+          this.query = localStorage.getItem("query")!;
+        }
       }
     })
     if (this.searchText) {
       this.query = this.searchText;
-    } else if(this.searchFieldService.query != null) {
-      this.query = this.searchFieldService.query;
     }
   }
 
@@ -63,6 +62,7 @@ export class SearchField {
       this.isAuth = false;
       this.auth.user = null;
       this.auth.logout();
+      localStorage.removeItem("query");
     }
     this.router.navigate(['/auth/sign_in']);
   }
