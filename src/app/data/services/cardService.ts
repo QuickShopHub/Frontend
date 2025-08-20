@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {QueryDTO} from '../DTO/query.interface';
+import {QueryDTO} from '../DTO/query.DTO';
 
 
 @Injectable({

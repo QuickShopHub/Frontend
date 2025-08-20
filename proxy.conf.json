@@ -25,5 +25,14 @@
     "pathRewrite": {
       "^/product": ""
     }
+  },
+  "/comment": {
+    "target": "https://26.144.26.116:8445",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/comment": ""
+    }
   }
 }

@@ -76,10 +76,10 @@
       <div class="newComment">
         <div class="name">{{ auth.user.username }}</div>
         <div class="new-com-field">
-          <textarea placeholder="Комментарий" maxlength="1000"></textarea>
+          <textarea placeholder="Комментарий" maxlength="1000" [(ngModel)]="comment" autoResize></textarea>
         </div>
         <div class="but">
-          <button class="send-comm-but">ОТПРАВИТЬ</button>
+          <button class="send-comm-but" (click)="sendComment()">ОТПРАВИТЬ</button>
         </div>
 
       </div>

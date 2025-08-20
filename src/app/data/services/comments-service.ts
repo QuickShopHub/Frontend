@@ -1,0 +1,20 @@
+import {inject, Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {NewCommentDTO} from '../DTO/NewCommentDTO';
+import {AuthService} from '../../auth/auth-service';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CommentsService {
+  http = inject(HttpClient)
+  auth = inject(AuthService)
+
+  public sendComment(comment: NewCommentDTO) {
+    this.http.post("/comment/api/new_comment", comment, {
+      headers: {
+        "Authorization": `Bearer ${this.auth.token}`
+      }
+    }).subscribe();
+  }
+}

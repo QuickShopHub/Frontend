@@ -6,12 +6,18 @@ import {SearchFieldService} from '../../data/services/searchFieldService';
 import {MiniPhoto} from '../../mini-photo/mini-photo';
 import {PhotoService} from '../../data/services/photo-service';
 import {AuthService} from '../../auth/auth-service';
+import {FormsModule} from '@angular/forms';
+import {CommentsService} from '../../data/services/comments-service';
+import {NewCommentDTO} from '../../data/DTO/NewCommentDTO';
+import {AutoResizeDirective} from '../../data/services/AutoResizeDirective';
 
 @Component({
   selector: 'app-product-page',
   imports: [
     SearchField,
-    MiniPhoto
+    MiniPhoto,
+    FormsModule,
+    AutoResizeDirective
   ],
   templateUrl: './product-page.html',
   styleUrl: './product-page.scss'
@@ -22,7 +28,9 @@ export class ProductPage {
   http:HttpClient = inject(HttpClient);
   photoService = inject(PhotoService);
   auth = inject(AuthService);
-
+  comment: string | null = null;
+  commentsService = inject(CommentsService);
+  productId: string | null = null;
   url: string | null = null;
 
   photosUrl: miniPhoto[] | null = null;
@@ -34,6 +42,7 @@ export class ProductPage {
     this.route.queryParams.subscribe(params => {
       const id = params['id'];
       const url = params['url'];
+      this.productId = id
       if (id) {
         this.createCard(id, url);
       }
@@ -57,6 +66,14 @@ export class ProductPage {
 
   changePhoto(url: string){
     this.url = url
+  }
+
+  sendComment(){
+    if(this.comment && this.productId) {
+      console.log(2)
+      const newComment = new NewCommentDTO(this.comment, this.auth.user!.id, this.productId, this.auth.user!.username)
+      this.commentsService.sendComment(newComment)
+    }
   }
 
 }
