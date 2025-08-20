@@ -58,16 +58,36 @@
   </div>
 
   <div class="dopInfo">
-    <div class="miniPhoto">
+    <div class="miniPhotos">
+      @if(urlAvatar){
+        <img src="{{ urlAvatar }}" alt="" class="mini-avatar mini-photo" (click)="changePhoto(urlAvatar)">
+      }
       @if(photosUrl){
         @for(urlMiniPhoto of photosUrl; track urlMiniPhoto.id){
-          <app-mini-photo
+          <app-mini-photo class="mini-photo" (click)="changePhoto(urlMiniPhoto.url)"
           [url]="urlMiniPhoto.url"
           ></app-mini-photo>
         }
       }
     </div>
-    <div class="comments">1</div>
+    <div class="comments-block">
+
+      @if(auth.user){
+      <div class="newComment">
+        <div class="name">{{ auth.user.username }}</div>
+        <div class="new-com-field">
+          <textarea placeholder="Комментарий" maxlength="1000"></textarea>
+        </div>
+        <div class="but">
+          <button class="send-comm-but">ОТПРАВИТЬ</button>
+        </div>
+
+      </div>
+      }
+
+      <div class="comments"></div>
+
+    </div>
   </div>
 
 }

@@ -5,6 +5,7 @@ import {SearchField} from '../../search-field/search-field';
 import {SearchFieldService} from '../../data/services/searchFieldService';
 import {MiniPhoto} from '../../mini-photo/mini-photo';
 import {PhotoService} from '../../data/services/photo-service';
+import {AuthService} from '../../auth/auth-service';
 
 @Component({
   selector: 'app-product-page',
@@ -16,10 +17,13 @@ import {PhotoService} from '../../data/services/photo-service';
   styleUrl: './product-page.scss'
 })
 export class ProductPage {
-  url: string | null = null;
+  urlAvatar: string | null = null;
   data: ForCustomer | null = null;
   http:HttpClient = inject(HttpClient);
   photoService = inject(PhotoService);
+  auth = inject(AuthService);
+
+  url: string | null = null;
 
   photosUrl: miniPhoto[] | null = null;
 
@@ -37,7 +41,8 @@ export class ProductPage {
   }
 
   public createCard(id:string, url:string):void {
-    this.url = url;
+    this.urlAvatar = url;
+    this.url = url
     this.http.get<ForCustomer[]>(`/product/api/products/id?id=${id}`).subscribe(res => {
       this.data = res[0];
       this.addPhotos(this.data.id)
@@ -48,6 +53,10 @@ export class ProductPage {
     this.photoService.getPhotos(id).subscribe(res => {
       this.photosUrl = res;
     })
+  }
+
+  changePhoto(url: string){
+    this.url = url
   }
 
 }

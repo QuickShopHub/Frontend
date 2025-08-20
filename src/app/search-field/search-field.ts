@@ -46,7 +46,7 @@ export class SearchField {
   }
 
   search(){
-    this.searchFieldService.query = this.query;
+    localStorage.setItem("query", this.query)
     this.router.navigate(['/find'], {
       queryParams: { query: this.query }
     });
