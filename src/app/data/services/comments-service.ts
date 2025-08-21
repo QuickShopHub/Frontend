@@ -12,11 +12,11 @@ export class CommentsService {
   auth = inject(AuthService)
 
   public sendComment(comment: NewCommentDTO) {
-    this.http.post("/comment/api/new_comment", comment, {
+    return  this.http.post<NewCommentDTO>("/comment/api/new_comment", comment, {
       headers: {
         "Authorization": `Bearer ${this.auth.token}`
       }
-    }).subscribe();
+    });
   }
 
   public getAllComments(id: string) {

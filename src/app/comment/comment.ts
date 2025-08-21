@@ -11,6 +11,7 @@ import {AuthService} from '../auth/auth-service';
 export class Comment {
   @Input() comment!: CommentData;
   @Input() admin!: boolean;
+  @Input() id: string | undefined;
   commentService = inject(CommentsService);
 
 

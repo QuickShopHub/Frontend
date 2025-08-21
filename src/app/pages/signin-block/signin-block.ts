@@ -14,9 +14,11 @@ import {LoginPage} from '../login-page/login-page';
   styleUrl: './signin-block.scss'
 })
 export class SigninBlock {
+
   form = new FormGroup({
     email: new FormControl(null),
-    password: new FormControl(null),
+    password: new FormControl(""),
+    passwordRepeat: new FormControl(null),
     username: new FormControl(null)
   })
   constructor(private router: Router) {}
@@ -25,7 +27,7 @@ export class SigninBlock {
   loginPage = inject(LoginPage);
 
   public onSubmit( ) {
-    if(this.form.valid) {
+    if(this.form.valid && this.form.value.password == this.form.value.passwordRepeat && this.form.value.password!.length > 4) {
       //@ts-ignore
       this.authService.signup(this.form.value).subscribe(
         (value) => {
@@ -47,6 +49,12 @@ export class SigninBlock {
           }
         }
       )
+    }
+    else if(this.form.value.password != this.form.value.passwordRepeat){
+      this.loginPage.errorMessage = "Пароли не совпадают"
+    }
+    else if(this.form.value.password!.length <= 4){
+      this.loginPage.errorMessage = "Пароль слишком короткий"
     }
   }
 

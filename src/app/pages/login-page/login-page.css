@@ -9,9 +9,9 @@
   top: 300px;
   left: 150px;
   width: 300px;
-  height: 220px;
   border-radius: 10px;
   padding: 10px;
+  display: inline-block;
 }
 
 .icon {

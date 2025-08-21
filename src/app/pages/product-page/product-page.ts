@@ -89,7 +89,9 @@ export class ProductPage {
   sendComment(){
     if(this.comment && this.productId) {
       const newComment = new NewCommentDTO(this.comment, this.auth.user!.id, this.productId, this.auth.user!.username)
-      this.commentsService.sendComment(newComment)
+      this.commentsService.sendComment(newComment).subscribe(() => {
+        window.location.reload();
+      })
       this.displayedComments.unshift({id:"", comment:this.comment, userId:this.auth.user?.id!, createdAt:"", productId:this.productId, countLikes:0, username:this.auth.user?.username!})
       this.comments.unshift(this.displayedComments[0])
       this.comment = ""
