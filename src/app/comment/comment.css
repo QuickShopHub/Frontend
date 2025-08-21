@@ -6,6 +6,7 @@
   padding: 10px;
   margin: 5px;
   height: auto;
+  position: relative;
 }
 
 .name {
@@ -21,6 +22,14 @@
   overflow-wrap: break-word;
   white-space: normal;
   display: block;
+}
+
+img {
+  position: absolute;
+  left: 95%;
+  bottom: 45%;
+  width: 20px;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=comment.css.map */

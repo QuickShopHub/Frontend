@@ -22,4 +22,13 @@ export class CommentsService {
   public getAllComments(id: string) {
     return this.http.get<CommentData[]>(`/comment/api/comments?id=${id}`);
   }
+
+  public deleteComment(id: string) {
+    return this.http.delete<CommentData[]>(`/comment/api/comments/${id}`, {
+      headers: {
+        "Authorization": `Bearer ${this.auth.token}`
+      }
+    });
+  }
+
 }

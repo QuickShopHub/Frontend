@@ -1,6 +1,6 @@
 import {Component, inject} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {SearchField} from '../../search-field/search-field';
 
 import {MiniPhoto} from '../../mini-photo/mini-photo';
@@ -39,6 +39,9 @@ export class ProductPage {
   comments: CommentData[] = [];
   displayedComments: CommentData[] = []
   maxComm = 10
+  canEdit: boolean = false;
+  router = inject(Router);
+  admin = false;
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -55,10 +58,21 @@ export class ProductPage {
   public createCard(id:string, url:string):void {
     this.urlAvatar = url;
     this.url = url
-    console.log(id);
+
     this.http.get<ForCustomer[]>(`/product/api/products/id?id=${id}`).subscribe(res => {
       this.data = res[0];
       this.addPhotos(this.data.id)
+      if(this.auth.user != null) {
+
+        if(this.auth.user.admin) {
+          this.canEdit = true;
+          this.admin = true;
+        }
+        else if(this.auth.user.id == this.data.idVendor) {
+          this.canEdit = true;
+        }
+      }
+
     });
   }
 
@@ -94,6 +108,22 @@ export class ProductPage {
   showMore(){
     this.maxComm+=10
     this.displayedComments = this.comments.slice(0, this.maxComm)
+  }
+
+  deleteProduct() {
+    this.http.delete<string>(`/product/api/products?id=${this.productId}`, {
+      headers: {
+        "Authorization": `Bearer ${this.auth.token}`
+      },
+      observe: 'response'
+    }).subscribe(response => {
+      localStorage.removeItem('query');
+      this.router.navigate(['/find'], {
+        queryParams: { query: "" },
+      });
+    }, error => {
+      console.error('Ошибка при удалении продукта:', error);
+    });
   }
 
 }

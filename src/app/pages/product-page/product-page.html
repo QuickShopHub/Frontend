@@ -40,6 +40,11 @@
     </div>
 
     <div class="wrap">
+      @if(canEdit){
+        <div class="trash">
+          <img src="assets/images/trash.png" alt="" (click)="deleteProduct()">
+        </div>
+      }
       <p class="price">{{ data.price }} ₽</p>
       <div class="buttons">
         <button class="cart-button">
@@ -89,6 +94,7 @@
           @for(com of displayedComments; track com.id){
             <app-comment
               [comment]="com"
+              [admin]="admin"
             ></app-comment>
           }
         </div>

@@ -2,6 +2,11 @@
   <div class="wrap">
     <div class="name">
       {{ comment.username }}
+      @if(admin){
+        <div class="trash">
+          <img src="assets/images/trash.png" alt="" (click)="deleteComment()">
+        </div>
+      }
     </div>
     <div class="comment">
       {{ comment.comment }}

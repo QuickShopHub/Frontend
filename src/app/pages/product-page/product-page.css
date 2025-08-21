@@ -25,6 +25,7 @@
   background-color: #e6e6e6;
   padding: 20px;
   border-radius: 10px;
+  position: relative;
 }
 
 .image-holder img {
@@ -52,6 +53,7 @@
 
 .price {
   font-size: xx-large;
+  margin-top: 0;
 }
 
 .buttons {
@@ -171,6 +173,17 @@ h2 {
   padding: 10px;
   font-weight: bold;
   font-size: 18px;
+}
+
+.trash {
+  position: absolute;
+  display: inline-block;
+  left: 83%;
+}
+
+.trash img {
+  width: 30px;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=product-page.css.map */
