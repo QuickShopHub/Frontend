@@ -186,4 +186,16 @@ h2 {
   cursor: pointer;
 }
 
+.stars {
+  width: 140px;
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.stars img {
+  width: 20px;
+  cursor: pointer;
+}
+
 /*# sourceMappingURL=product-page.css.map */

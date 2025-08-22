@@ -1,8 +1,11 @@
 import {Component, Input} from '@angular/core';
+import {DecimalPipe} from '@angular/common';
 
 @Component({
   selector: 'app-product-card',
-  imports: [],
+  imports: [
+    DecimalPipe
+  ],
   templateUrl: './product-card.html',
   styleUrl: './product-card.scss'
 })

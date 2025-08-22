@@ -11,6 +11,10 @@ import {CommentsService} from '../../data/services/comments-service';
 import {NewCommentDTO} from '../../data/DTO/NewCommentDTO';
 import {AutoResizeDirective} from '../../data/services/AutoResizeDirective';
 import {Comment} from '../../comment/comment';
+import {RatingService} from '../../data/services/rating-service';
+import {RatingDTO} from '../../data/DTO/UpdateRatingDTO';
+import {DecimalPipe} from '@angular/common';
+
 
 @Component({
   selector: 'app-product-page',
@@ -19,7 +23,8 @@ import {Comment} from '../../comment/comment';
     MiniPhoto,
     FormsModule,
     AutoResizeDirective,
-    Comment
+    Comment,
+    DecimalPipe
   ],
   templateUrl: './product-page.html',
   styleUrl: './product-page.scss'
@@ -42,6 +47,10 @@ export class ProductPage {
   canEdit: boolean = false;
   router = inject(Router);
   admin = false;
+  rating = 0
+  updateRatingService = inject(RatingService);
+  timeGrade : Date | null = null;
+
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -52,6 +61,18 @@ export class ProductPage {
         this.createCard(id, url);
       }
       this.loadComments()
+
+      if(this.auth.user!=null){
+        this.updateRatingService.getRating(id, this.auth.user.id).subscribe(res => {
+          this.rating = res.grade
+        })
+      }
+      const storedTime: string | null = localStorage.getItem(`grade${this.productId}`);
+      if(storedTime){
+        this.timeGrade = new Date(storedTime)
+      }
+
+
     });
   }
 
@@ -72,7 +93,7 @@ export class ProductPage {
           this.canEdit = true;
         }
       }
-
+      console.log(this.data.rating)
     });
   }
 
@@ -92,8 +113,6 @@ export class ProductPage {
       this.commentsService.sendComment(newComment).subscribe(() => {
         window.location.reload();
       })
-      this.displayedComments.unshift({id:"", comment:this.comment, userId:this.auth.user?.id!, createdAt:"", productId:this.productId, countLikes:0, username:this.auth.user?.username!})
-      this.comments.unshift(this.displayedComments[0])
       this.comment = ""
     }
   }
@@ -127,5 +146,20 @@ export class ProductPage {
       console.error('Ошибка при удалении продукта:', error);
     });
   }
+
+
+  star(index: number){
+    if(this.timeGrade == null || new Date().getTime() - this.timeGrade.getTime() > 60*1000 ) {
+      this.rating = index;
+      const ratingDto = new RatingDTO(this.productId!, this.auth.user?.id!, this.rating);
+      this.updateRatingService.setRating(ratingDto).subscribe(res => {
+
+      })
+      this.timeGrade = new Date()
+      localStorage.setItem(`grade${this.productId}`, this.timeGrade.toString());
+    }
+  }
+
+
 
 }
