@@ -13,7 +13,15 @@ export class AuthService {
   public token :String | null = null;
   public user :User|null = null;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    // Загрузка токена и пользователя из localStorage при инициализации
+    this.loadFromLocalStorage();
+  }
+  private loadFromLocalStorage(){
+    this.token = localStorage.getItem("token");
+    const userData = localStorage.getItem('user_data');
+    this.user = userData ? JSON.parse(userData) : null;
+  }
 
   public signin(payload: {email: string, password: string}){
     return  this.http.post<UserAuth>('/user/api/auth/login', payload)
@@ -27,7 +35,11 @@ export class AuthService {
     console.log('logged out');
     return this.http.post('/user/api/auth/logout', {}, { withCredentials: true } ).subscribe(
       response => {
-        console.log('Logout successful', response);
+        this.token = null;
+        this.user = null;
+        localStorage.removeItem("query");
+        localStorage.removeItem('token');
+        localStorage.removeItem('user_data');
       },
       error => {
         console.error('Logout error', error);  // Поймать и отобразить возможные ошибки

@@ -32,6 +32,8 @@ export class LoginBlock {
           this.authService.token = value.token;
           if (value.user!= null && value.token != null) {
             this.authService.user = new User(value.user.id, value.user.username, value.user.password, value.user.email, value.user.admin, value.user.created_at);
+            localStorage.setItem('token', value.token);
+            localStorage.setItem('user_data', JSON.stringify(this.authService.user));
             this.router.navigate(['/find'])
           }
 

@@ -209,3 +209,25 @@ h2{
   width: 20px;
   cursor: pointer;
 }
+
+.products-not-found {
+  position: relative;
+  top: 200px;
+  left: 300px;
+  background-color: #b3b3b3;
+  display: inline-grid;
+  grid-template-columns: 2fr 7fr;
+  padding: 16px;
+  margin: 0;
+  border-radius: 12px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.cart-not-found {
+  width: 50%;
+  height: 50%;
+  fill: #333333;
+}

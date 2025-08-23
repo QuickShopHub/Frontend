@@ -45,6 +45,7 @@ export class SearchField {
   }
 
   search(){
+    console.log(this.auth.user);
     localStorage.setItem("query", this.query)
     this.router.navigate(['/find'], {
       queryParams: { query: this.query }
@@ -58,11 +59,8 @@ export class SearchField {
 
   log(){
     if(this.isAuth){
-      this.auth.token = null;
-      this.isAuth = false;
-      this.auth.user = null;
       this.auth.logout();
-      localStorage.removeItem("query");
+      this.isAuth = false;
     }
     this.router.navigate(['/auth/sign_in']);
   }

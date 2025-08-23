@@ -159,7 +159,4 @@ export class ProductPage {
       localStorage.setItem(`grade${this.productId}`, this.timeGrade.toString());
     }
   }
-
-
-
 }
