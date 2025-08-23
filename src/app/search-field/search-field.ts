@@ -19,6 +19,7 @@ export class SearchField {
   auth = inject(AuthService);
   isAuth = false;
   route: ActivatedRoute = inject(ActivatedRoute);
+  isOpen = false
 
   @Input() searchText: string | undefined;
 
@@ -45,13 +46,13 @@ export class SearchField {
   }
 
   search(){
-    console.log(this.auth.user);
     localStorage.setItem("query", this.query)
     this.router.navigate(['/find'], {
       queryParams: { query: this.query }
     });
   }
-  isOpen = false
+
+
 
   menu(){
     this.isOpen = !this.isOpen;
@@ -64,4 +65,12 @@ export class SearchField {
     }
     this.router.navigate(['/auth/sign_in']);
   }
+
+  backPage(){
+    localStorage.removeItem("query")
+    this.router.navigate(['/find'], {
+      queryParams: { query: "" }
+    });
+  }
+
 }

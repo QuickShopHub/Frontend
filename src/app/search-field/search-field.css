@@ -48,6 +48,7 @@ input:focus {
   width: 70%;
   height: 80%;
   border-radius: 3px;
+  cursor: pointer;
 }
 
 .icon {

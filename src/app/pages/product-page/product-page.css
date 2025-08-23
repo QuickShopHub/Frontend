@@ -220,4 +220,11 @@ h2 {
   fill: #333333;
 }
 
+.back {
+  cursor: pointer;
+  width: 155px;
+  display: grid;
+  justify-self: center;
+}
+
 /*# sourceMappingURL=product-page.css.map */

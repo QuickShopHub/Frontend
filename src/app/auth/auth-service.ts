@@ -33,18 +33,19 @@ export class AuthService {
 
   public logout() {
     console.log('logged out');
-    return this.http.post('/user/api/auth/logout', {}, { withCredentials: true } ).subscribe(
-      response => {
+    localStorage.removeItem("query");
+    localStorage.removeItem('token');
+    localStorage.removeItem('user_data');
+    this.http.post('/user/api/auth/logout', {}, { withCredentials: true } ).subscribe(
+      () => {
         this.token = null;
         this.user = null;
-        localStorage.removeItem("query");
-        localStorage.removeItem('token');
-        localStorage.removeItem('user_data');
-      },
-      error => {
-        console.error('Logout error', error);  // Поймать и отобразить возможные ошибки
       }
     );
+  }
+
+  public refreshToken() {
+    return this.http.post<UserAuth>('/user/api/auth/refresh', {})
   }
 
 

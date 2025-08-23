@@ -38,12 +38,9 @@ export class SearchPage {
     }
     this.route.queryParams.subscribe(params => {
       const query = params['query'];
-      if (query) {
-        this.searchQuery = query;
-        this.search(query, this.page);
-      }else {
-        this.cards = null
-      }
+      this.searchQuery = query;
+      this.search(query, this.page);
+
     });
   }
 
@@ -95,6 +92,14 @@ export class SearchPage {
       localStorage.setItem('page', this.page.toString());
       this.search(this.searchQuery, this.page)
     }
+  }
+
+  backPage(){
+    localStorage.removeItem("query")
+    this.searchQuery = ""
+    this.router.navigate(['/find'], {
+      queryParams: { query: this.searchQuery }
+    });
   }
 
 }

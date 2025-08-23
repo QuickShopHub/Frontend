@@ -1,7 +1,7 @@
 <header>
   <nav class="nav-bar">
     <div class="icon">
-      <img class="icon-img" src="assets/images/icon.png">
+      <img class="icon-img" src="assets/images/icon.png" (click)="backPage()">
     </div>
     <div class="search-field">
       <input [(ngModel)]="query" (keyup.enter)="search()" type="text" placeholder="Искать на BLUEBUTCHER">

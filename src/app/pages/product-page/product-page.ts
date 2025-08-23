@@ -93,7 +93,6 @@ export class ProductPage {
           this.canEdit = true;
         }
       }
-      console.log(this.data.rating)
     });
   }
 
@@ -110,10 +109,30 @@ export class ProductPage {
   sendComment(){
     if(this.comment && this.productId) {
       const newComment = new NewCommentDTO(this.comment, this.auth.user!.id, this.productId, this.auth.user!.username)
-      this.commentsService.sendComment(newComment).subscribe(() => {
-        window.location.reload();
-      })
-      this.comment = ""
+      this.commentsService.sendComment(newComment).subscribe({
+        next: () => {
+          // Успешная отправка
+          window.location.reload();
+          this.comment = "";
+        },
+        error: (error) => {
+          if (error.error === 'Token expired' || error.message?.includes('Token expired')) {
+            this.auth.refreshToken().subscribe(
+              (value) => {
+                this.auth.token = value.token;
+                this.auth.user = value.user;
+                localStorage.setItem('token', value.token!);
+                localStorage.setItem('user_data', JSON.stringify(value.user));
+                this.sendComment()
+            },
+              (error_) => {
+                console.log(error_.error.message);
+                this.comment = "";
+                this.auth.logout()
+              })
+          }
+        }
+      });
     }
   }
 
@@ -143,7 +162,21 @@ export class ProductPage {
         queryParams: { query: "" },
       });
     }, error => {
-      console.error('Ошибка при удалении продукта:', error);
+      if (error.error === 'Token expired' || error.message?.includes('Token expired')) {
+        this.auth.refreshToken().subscribe(
+          (value) => {
+            this.auth.token = value.token;
+            this.auth.user = value.user;
+            localStorage.setItem('token', value.token!);
+            localStorage.setItem('user_data', JSON.stringify(value.user));
+            this.deleteProduct()
+          },
+          (error_) => {
+            console.log(error_.error.message);
+            this.auth.logout()
+          })
+      }
+
     });
   }
 
@@ -154,9 +187,31 @@ export class ProductPage {
       const ratingDto = new RatingDTO(this.productId!, this.auth.user?.id!, this.rating);
       this.updateRatingService.setRating(ratingDto).subscribe(res => {
 
+      }, error => {
+        if (error.error === 'Token expired' || error.message?.includes('Token expired')) {
+          this.auth.refreshToken().subscribe(
+            (value) => {
+              this.auth.token = value.token;
+              this.auth.user = value.user;
+              localStorage.setItem('token', value.token!);
+              localStorage.setItem('user_data', JSON.stringify(value.user));
+              this.star(index)
+            },
+            (error_) => {
+              console.log(error_.error.message);
+              this.auth.logout()
+            })
+        }
+
       })
       this.timeGrade = new Date()
       localStorage.setItem(`grade${this.productId}`, this.timeGrade.toString());
     }
+  }
+  backPage(){
+    localStorage.removeItem("query")
+    this.router.navigate(['/find'], {
+      queryParams: { query: ""}
+    });
   }
 }

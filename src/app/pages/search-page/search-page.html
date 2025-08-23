@@ -13,7 +13,7 @@
         }
 
       </div>
-      @if(result!.page!.totalElements > result!.page.size){
+      @if(result &&  result!.page && result!.page!.totalElements > result!.page.size){
       <footer class="bot">
         <img src="assets/images/back.png" (click)="back()" class="img1" alt="">
         <div class="value"><input [(ngModel)]="page" (keyup.enter)="setPage()" maxlength="100000000"></div>
@@ -31,7 +31,7 @@
       </div>
       <div>
         <p>По вашему запросу ничего не найдено</p>
-        <p>Вернуться на главную</p>
+        <p class="back" (click)="backPage()">Вернуться на главную</p>
       </div>
     </div>
   }

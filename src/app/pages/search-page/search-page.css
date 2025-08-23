@@ -93,4 +93,11 @@ img {
   outline: none;
 }
 
+.back {
+  cursor: pointer;
+  width: 155px;
+  display: grid;
+  justify-self: center;
+}
+
 /*# sourceMappingURL=search-page.css.map */
