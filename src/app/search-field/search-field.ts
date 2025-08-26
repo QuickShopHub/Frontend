@@ -25,13 +25,19 @@ export class SearchField {
 
 
   constructor() {
-    this.isAuth = this.auth.token != null;
+
   }
 
   query: string = "";
 
 
   ngOnInit() {
+
+    this.auth.token$.subscribe(token => {
+      this.isAuth = token != null;
+      console.log("auth: " + this.isAuth);
+    });
+    console.log("auth: "+this.isAuth)
     if(!this.searchText){
       this.searchText = ""
     }
@@ -41,6 +47,9 @@ export class SearchField {
         if(localStorage.getItem("query") != null){
           this.query = localStorage.getItem("query")!;
         }
+      }
+      else{
+        this.query = ""
       }
     })
     if (this.searchText) {

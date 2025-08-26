@@ -1,0 +1,28 @@
+.field {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #9a9a9a;
+  z-index: 1000;
+  padding: 10px;
+}
+
+.main {
+  background: #101010;
+  min-height: 100vh;
+}
+
+.body {
+  padding-left: 20px;
+  padding-top: 20px;
+  min-height: 100vh;
+  width: 1250px;
+  margin: 88px 18% 0 18%;
+  background: #636363;
+  display: grid;
+  grid-template-rows: auto auto;
+  justify-items: center;
+}
+
+/*# sourceMappingURL=profile.css.map */

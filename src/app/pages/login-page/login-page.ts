@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {Router, RouterOutlet} from '@angular/router';
+import {AuthService} from '../../auth/auth-service';
 
 @Component({
   selector: 'app-login-page',
@@ -12,13 +13,11 @@ import {Router, RouterOutlet} from '@angular/router';
   styleUrl: './login-page.scss'
 })
 export class LoginPage {
-
+  auth = inject(AuthService);
   public errorMessage: string = "";
 
-  form = new FormGroup({
-    email: new FormControl(null),
-    password: new FormControl(null)
-  })
+  ngOnInit(): void {
+  }
 
   constructor(private router: Router) {}
 

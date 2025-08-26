@@ -2,6 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {User} from './User';
 import {Router} from '@angular/router';
+import {BehaviorSubject} from 'rxjs';
 
 
 @Injectable({
@@ -9,9 +10,10 @@ import {Router} from '@angular/router';
 })
 export class AuthService {
   http = inject(HttpClient)
-
-  public token :String | null = null;
+  public tokenSubject = new BehaviorSubject<string | null>(null);
+  public token :string | null = null;
   public user :User|null = null;
+  public token$ = this.tokenSubject.asObservable();
 
   constructor(private router: Router) {
     // Загрузка токена и пользователя из localStorage при инициализации
@@ -36,10 +38,12 @@ export class AuthService {
     localStorage.removeItem("query");
     localStorage.removeItem('token');
     localStorage.removeItem('user_data');
+    this.token = null;
+    this.user = null;
+    this.tokenSubject.next(null);
     this.http.post('/user/api/auth/logout', {}, { withCredentials: true } ).subscribe(
       () => {
-        this.token = null;
-        this.user = null;
+
       }
     );
   }
