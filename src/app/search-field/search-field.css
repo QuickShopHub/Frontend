@@ -69,12 +69,14 @@ input:focus {
   max-width: 40%;
   width: 40%;
   min-width: 40%;
+  cursor: pointer;
 }
 
 .basket-img {
   max-width: 40%;
   width: 40%;
   min-width: 40%;
+  cursor: pointer;
 }
 
 .profile-img {
@@ -128,6 +130,10 @@ input:focus {
   overflow: hidden; /* Скрывает переполнение */
   text-overflow: ellipsis; /* Добавляет "..." в конце, если текст длиннее */
   white-space: nowrap; /* Запрещает перенос строк */
+}
+
+.find-button button {
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=search-field.css.map */

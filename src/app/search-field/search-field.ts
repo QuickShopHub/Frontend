@@ -32,6 +32,9 @@ export class SearchField {
 
 
   ngOnInit() {
+    if(!this.searchText){
+      this.searchText = ""
+    }
     this.route.queryParams.subscribe(params => {
       this.query = params['query'];
       if(!this.query){
@@ -70,6 +73,18 @@ export class SearchField {
     localStorage.removeItem("query")
     this.router.navigate(['/find'], {
       queryParams: { query: "" }
+    });
+  }
+
+  favorites(){
+    this.router.navigate(['/some-elements'], {
+      queryParams: { page: "favorites" }
+    });
+  }
+
+  basket(){
+    this.router.navigate(['/some-elements'], {
+      queryParams: { page: "buy" }
     });
   }
 

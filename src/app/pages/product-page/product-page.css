@@ -68,14 +68,7 @@
   padding: 14px;
   border-radius: 7px;
   color: white;
-}
-
-.heard-button {
-  background-color: #e178bc;
-  border: none;
-  padding: 14px;
-  border-radius: 7px;
-  color: white;
+  cursor: pointer;
 }
 
 h2 {
@@ -225,6 +218,21 @@ h2 {
   width: 155px;
   display: grid;
   justify-self: center;
+}
+
+.heart {
+  position: relative;
+  width: 30px;
+  left: 2px;
+}
+
+.heard-button {
+  background-color: #e178bc;
+  border: none;
+  padding: 14px;
+  border-radius: 7px;
+  color: white;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=product-page.css.map */

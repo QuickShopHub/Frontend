@@ -14,6 +14,9 @@ import {Comment} from '../../comment/comment';
 import {RatingService} from '../../data/services/rating-service';
 import {RatingDTO} from '../../data/DTO/UpdateRatingDTO';
 import {DecimalPipe} from '@angular/common';
+import {Favorite} from '../../data/DTO/FavoritesDTO';
+import {BuyService} from '../../data/services/buy-service';
+import {BuyProductDTO} from '../../data/DTO/BuyProductDTO';
 
 
 @Component({
@@ -50,6 +53,8 @@ export class ProductPage {
   rating = 0
   updateRatingService = inject(RatingService);
   timeGrade : Date | null = null;
+  buyService = inject(BuyService);
+  isFavorite: boolean = false;
 
 
   ngOnInit() {
@@ -57,6 +62,7 @@ export class ProductPage {
       const id = params['id'];
       const url = params['url'];
       this.productId = id
+      this.favorite_status()
       if (id) {
         this.createCard(id, url);
       }
@@ -74,6 +80,32 @@ export class ProductPage {
 
 
     });
+  }
+
+  private favorite_status(){
+    if(this.auth.user!=null){
+      this.buyService.getFavoriteStatus(this.auth.user.id, this.productId!).subscribe(res => {
+        this.isFavorite = res.answer
+        console.log(this.isFavorite)
+      },
+        error => {
+          if (error.error === 'Token expired' || error.message?.includes('Token expired')) {
+            this.auth.refreshToken().subscribe(
+              (value) => {
+                this.auth.token = value.token;
+                this.auth.user = value.user;
+                localStorage.setItem('token', value.token!);
+                localStorage.setItem('user_data', JSON.stringify(value.user));
+                this.favorite_status()
+              },
+              (error_) => {
+                console.log(error_.error.message);
+                this.comment = "";
+                this.auth.logout()
+              })
+          }
+        })
+    }
   }
 
   public createCard(id:string, url:string):void {
@@ -214,4 +246,86 @@ export class ProductPage {
       queryParams: { query: ""}
     });
   }
+
+
+  setFavorites(){
+    if(this.auth.user && !this.isFavorite) {
+      let favorite = new Favorite("", this.productId!, this.auth.user!.id);
+      this.buyService.setFavorite(favorite).subscribe(
+        res => {
+          window.location.reload()
+      },
+        error => {
+          if (error.error === 'Token expired' || error.message?.includes('Token expired')) {
+            this.auth.refreshToken().subscribe(
+              (value) => {
+                this.auth.token = value.token;
+                this.auth.user = value.user;
+                localStorage.setItem('token', value.token!);
+                localStorage.setItem('user_data', JSON.stringify(value.user));
+                this.setFavorites()
+              },
+              (error_) => {
+                console.log(error_.error.message);
+                this.auth.logout()
+              })
+          }
+        }
+      )
+    }
+    else if(this.auth.user && this.isFavorite){
+      console.log(1)
+      this.buyService.deleteFavorite(this.auth.user.id, this.productId!).subscribe(
+        res => {
+
+        },
+        error => {
+          if (error.error === 'Token expired' || error.message?.includes('Token expired')) {
+            this.auth.refreshToken().subscribe(
+              (value) => {
+                this.auth.token = value.token;
+                this.auth.user = value.user;
+                localStorage.setItem('token', value.token!);
+                localStorage.setItem('user_data', JSON.stringify(value.user));
+                this.setFavorites()
+              },
+              (error_) => {
+                console.log(error_.error.message);
+                this.auth.logout()
+              })
+          }
+        }
+      )
+      window.location.reload()
+    }
+
+  }
+
+  buyProduct(){
+    if(this.auth.user){
+      let buyProductDTO = new BuyProductDTO("", this.productId!, this.auth.user.id, "", this.data?.price!)
+
+      this.buyService.setBuyProduct(buyProductDTO).subscribe(res => {
+
+      },
+        error => {
+          if (error.error === 'Token expired' || error.message?.includes('Token expired')) {
+            this.auth.refreshToken().subscribe(
+              (value) => {
+                this.auth.token = value.token;
+                this.auth.user = value.user;
+                localStorage.setItem('token', value.token!);
+                localStorage.setItem('user_data', JSON.stringify(value.user));
+                this.buyProduct()
+              },
+              (error_) => {
+                console.log(error_.error.message);
+                this.auth.logout()
+              })
+          }
+        })
+
+    }
+  }
+
 }
