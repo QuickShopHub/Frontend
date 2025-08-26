@@ -1,6 +1,5 @@
 import {Component, inject, Input} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {NgIf} from '@angular/common';
 import {AuthService} from '../auth/auth-service';
 import {ActivatedRoute, Router} from '@angular/router';
 
@@ -8,8 +7,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 @Component({
   selector: 'app-search-field',
   imports: [
-    FormsModule,
-    NgIf
+    FormsModule
   ],
   templateUrl: './search-field.html',
   styleUrl: './search-field.scss'
@@ -19,7 +17,6 @@ export class SearchField {
   auth = inject(AuthService);
   isAuth = false;
   route: ActivatedRoute = inject(ActivatedRoute);
-  isOpen = false
 
   @Input() searchText: string | undefined;
 
@@ -33,10 +30,7 @@ export class SearchField {
 
   ngOnInit() {
 
-    this.auth.token$.subscribe(token => {
-      this.isAuth = token != null;
-      console.log("auth: " + this.isAuth);
-    });
+    this.isAuth = this.auth.token != null;
     console.log("auth: "+this.isAuth)
     if(!this.searchText){
       this.searchText = ""
@@ -65,19 +59,6 @@ export class SearchField {
   }
 
 
-
-  menu(){
-    this.isOpen = !this.isOpen;
-  }
-
-  log(){
-    if(this.isAuth){
-      this.auth.logout();
-      this.isAuth = false;
-    }
-    this.router.navigate(['/auth/sign_in']);
-  }
-
   backPage(){
     localStorage.removeItem("query")
     this.router.navigate(['/find'], {
@@ -95,6 +76,16 @@ export class SearchField {
     this.router.navigate(['/some-elements'], {
       queryParams: { page: "buy" }
     });
+  }
+
+  move(){
+    if(this.auth.token != null){
+      console.log(111)
+      this.router.navigate(['/my_profile'], {})
+    }
+    else{
+      this.router.navigate(['/auth/sign_in'], {})
+    }
   }
 
 }

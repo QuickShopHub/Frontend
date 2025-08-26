@@ -22,12 +22,12 @@ import {BuyProductDTO} from '../../data/DTO/BuyProductDTO';
 @Component({
   selector: 'app-product-page',
   imports: [
-    SearchField,
     MiniPhoto,
     FormsModule,
     AutoResizeDirective,
     Comment,
-    DecimalPipe
+    DecimalPipe,
+    SearchField
   ],
   templateUrl: './product-page.html',
   styleUrl: './product-page.scss'

@@ -19,22 +19,14 @@
          <img class="basket-img" src="assets/images/basket.png" (click)="basket()">
           <div>корзина</div>
         </div>
-        <div class="profile nav-icon" (click)="menu()" [class.active]="isOpen">
-          <img class="profile-img" src="assets/images/profile.png">
+        <div class="profile nav-icon">
+          <img class="profile-img" src="assets/images/profile.png" (click)="move()">
           <div class="username">
             @if (auth.user!=null){
               {{ auth.user.username }}
             }
             @else{
               профиль
-            }
-          </div>
-          <div class="dropdown-menu" *ngIf="isOpen" (click)="log()">
-            @if(isAuth){
-              Выйти
-            }
-            @else{
-              Войти
             }
           </div>
         </div>

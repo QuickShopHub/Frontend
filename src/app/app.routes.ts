@@ -5,6 +5,7 @@ import {LoginBlock} from './pages/login-block/login-block';
 import {SigninBlock} from './pages/signin-block/signin-block';
 import {ProductPage} from './pages/product-page/product-page';
 import {ProductList} from './pages/product-list/product-list';
+import {Profile} from './pages/profile/profile';
 
 export const routes: Routes = [
   {path: 'auth', component: LoginPage, children: [
@@ -14,4 +15,5 @@ export const routes: Routes = [
   {path: 'find', component: SearchPage},
   {path: 'result', component: ProductPage},
   {path: 'some-elements', component: ProductList},
+  {path: 'my_profile', component: Profile},
 ];

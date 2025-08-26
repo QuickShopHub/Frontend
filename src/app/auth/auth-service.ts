@@ -13,17 +13,9 @@ export class AuthService {
   public tokenSubject = new BehaviorSubject<string | null>(null);
   public token :string | null = null;
   public user :User|null = null;
-  public token$ = this.tokenSubject.asObservable();
 
-  constructor(private router: Router) {
-    // Загрузка токена и пользователя из localStorage при инициализации
-    this.loadFromLocalStorage();
-  }
-  private loadFromLocalStorage(){
-    this.token = localStorage.getItem("token");
-    const userData = localStorage.getItem('user_data');
-    this.user = userData ? JSON.parse(userData) : null;
-  }
+
+
 
   public signin(payload: {email: string, password: string}){
     return  this.http.post<UserAuth>('/user/api/auth/login', payload)
@@ -40,7 +32,6 @@ export class AuthService {
     localStorage.removeItem('user_data');
     this.token = null;
     this.user = null;
-    this.tokenSubject.next(null);
     this.http.post('/user/api/auth/logout', {}, { withCredentials: true } ).subscribe(
       () => {
 

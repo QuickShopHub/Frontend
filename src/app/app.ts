@@ -7,8 +7,7 @@ import {Profile} from './pages/profile/profile';
 @Component({
   selector: 'app-root',
   imports: [
-    RouterOutlet,
-    Profile
+    RouterOutlet
   ],
   templateUrl: './app.html',
   styleUrl: './app.css'

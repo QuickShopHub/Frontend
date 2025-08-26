@@ -9,8 +9,8 @@ import {FormsModule} from '@angular/forms';
   selector: 'app-search-page',
   imports: [
     ProductCard,
-    SearchField,
-    FormsModule
+    FormsModule,
+    SearchField
   ],
   templateUrl: './search-page.html',
   styleUrl: './search-page.scss'
