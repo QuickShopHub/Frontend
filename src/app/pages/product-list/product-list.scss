@@ -50,8 +50,13 @@
   margin: 88px 18% 0 18%;
   background: #636363;
   display: grid;
-  grid-template-rows: auto auto;
+  grid-template-rows: 40px auto auto;
   justify-items: center;
+}
+
+.title{
+  font-size: 28px;
+  font-weight: bold;
 }
 
 .elements {

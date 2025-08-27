@@ -6,6 +6,16 @@
   <div class="wrap">
     @if(cards){
       <div class="body">
+
+        <div class="title">
+          @if(this.page === "favorites" ){
+            Избранное
+          }
+          @else if(this.page === "buy"){
+            Покупки
+          }
+        </div>
+
         <div class="elements">
           @for(card of displayCards; track card.id){
             <app-product-card

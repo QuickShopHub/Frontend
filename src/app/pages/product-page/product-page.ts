@@ -77,8 +77,8 @@ export class ProductPage {
       if(storedTime){
         this.timeGrade = new Date(storedTime)
       }
-
-
+      console.log(localStorage.getItem('token'));
+      console.log(localStorage.getItem('user_data'));
     });
   }
 
@@ -86,7 +86,6 @@ export class ProductPage {
     if(this.auth.user!=null){
       this.buyService.getFavoriteStatus(this.auth.user.id, this.productId!).subscribe(res => {
         this.isFavorite = res.answer
-        console.log(this.isFavorite)
       },
         error => {
           if (error.error === 'Token expired' || error.message?.includes('Token expired')) {

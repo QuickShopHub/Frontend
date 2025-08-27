@@ -18,7 +18,7 @@ export class SearchField {
   isAuth = false;
   route: ActivatedRoute = inject(ActivatedRoute);
 
-  @Input() searchText: string | undefined;
+  @Input() searchText: string = "";
 
 
   constructor() {
@@ -67,15 +67,19 @@ export class SearchField {
   }
 
   favorites(){
-    this.router.navigate(['/some-elements'], {
-      queryParams: { page: "favorites" }
-    });
+    if(this.auth.token != null) {
+      this.router.navigate(['/some-elements'], {
+        queryParams: {page: "favorites"}
+      });
+    }
   }
 
   basket(){
-    this.router.navigate(['/some-elements'], {
-      queryParams: { page: "buy" }
-    });
+    if(this.auth.token != null) {
+      this.router.navigate(['/some-elements'], {
+        queryParams: {page: "buy"}
+      });
+    }
   }
 
   move(){

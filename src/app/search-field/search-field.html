@@ -11,16 +11,16 @@
     </div>
 
     <div class="navigation">
-        <div class="likes nav-icon">
-          <img class="heart-img" src="assets/images/heart.png" (click)="favorites()">
+        <div class="likes nav-icon" (click)="favorites()">
+          <img class="heart-img" src="assets/images/heart.png">
           <div>избранное</div>
         </div>
-        <div class="basket nav-icon">
-         <img class="basket-img" src="assets/images/basket.png" (click)="basket()">
+        <div class="basket nav-icon" (click)="basket()">
+         <img class="basket-img" src="assets/images/basket.png">
           <div>корзина</div>
         </div>
-        <div class="profile nav-icon">
-          <img class="profile-img" src="assets/images/profile.png" (click)="move()">
+        <div class="profile nav-icon" (click)="move()">
+          <img class="profile-img" src="assets/images/profile.png">
           <div class="username">
             @if (auth.user!=null){
               {{ auth.user.username }}

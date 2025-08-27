@@ -83,8 +83,6 @@ input:focus{
   max-width: 40%;
   width: 40%;
   min-width: 40%;
-  cursor: pointer;
-
 }
 
 .basket-img{
@@ -92,7 +90,6 @@ input:focus{
   max-width: 40%;
   width: 40%;
   min-width: 40%;
-  cursor: pointer;
 }
 
 .profile-img{
@@ -105,20 +102,13 @@ input:focus{
 .nav-icon{
   display: grid;
   justify-items: center;
+  cursor: pointer;
 }
 
 .profile{
   width: 80px;
   max-width: 80px;
   min-width: 80px;
-  cursor: pointer;
-
-  &.active{
-    background-color: rgb(0, 144, 255);
-    border-radius: 15px;
-
-  }
-
 }
 
 .basket{
@@ -139,12 +129,6 @@ input:focus{
   cursor: pointer;
 }
 
-.dropdown-menu{
-  cursor: pointer;
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
-
 .username {
   max-width: 80px;
   overflow: hidden; /* Скрывает переполнение */
@@ -155,3 +139,4 @@ input:focus{
 .find-button button{
   cursor: pointer;
 }
+

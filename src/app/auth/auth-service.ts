@@ -14,8 +14,23 @@ export class AuthService {
   public token :string | null = null;
   public user :User|null = null;
 
+  constructor() {
+    this.loadAuthData();
+  }
 
+  private loadAuthData() {
+    const token = localStorage.getItem('token');
+    const userData = localStorage.getItem('user_data');
 
+    if (token) {
+      this.token = token;
+      this.tokenSubject.next(token); // Обновляем токен в BehaviorSubject
+    }
+
+    if (userData) {
+      this.user = JSON.parse(userData); // Восстанавливаем данные пользователя
+    }
+  }
 
   public signin(payload: {email: string, password: string}){
     return  this.http.post<UserAuth>('/user/api/auth/login', payload)

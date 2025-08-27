@@ -23,8 +23,6 @@ export class SearchPage {
 
   result: ApiResponse | undefined;
   route: ActivatedRoute = inject(ActivatedRoute);
-  constructor() {
-  }
 
   searchQuery: string = "";
 

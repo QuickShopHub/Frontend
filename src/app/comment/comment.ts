@@ -1,6 +1,6 @@
 import {Component, inject, Input} from '@angular/core';
 import {CommentsService} from '../data/services/comments-service';
-import {AuthService} from '../auth/auth-service';
+
 
 @Component({
   selector: 'app-comment',
