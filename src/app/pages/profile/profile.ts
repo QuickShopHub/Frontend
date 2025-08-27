@@ -5,13 +5,15 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {HttpClient} from '@angular/common/http';
 import {EmailChange, NameChange, PasswordChange} from '../../data/DTO/ChangeDTO';
 import {Router} from '@angular/router';
+import {CreateProduct} from '../../create-product/create-product';
 
 @Component({
   selector: 'app-profile',
   imports: [
 
     ReactiveFormsModule,
-    SearchField
+    SearchField,
+    CreateProduct
   ],
   templateUrl: './profile.html',
   styleUrl: './profile.scss'
