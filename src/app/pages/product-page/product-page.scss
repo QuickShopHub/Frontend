@@ -247,3 +247,19 @@ h2{
   color: white;
   cursor: pointer;
 }
+
+
+.message{
+  position: fixed;
+  left: 800px;
+  top: 300px;
+  height: 100px;
+  width: 300px;
+  background: #b4a414;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 15px;
+}

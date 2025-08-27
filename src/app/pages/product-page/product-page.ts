@@ -56,6 +56,17 @@ export class ProductPage {
   buyService = inject(BuyService);
   isFavorite: boolean = false;
   local_query = ""
+  message = ""
+  showMessage: boolean = false;
+
+  showTempMessage() {
+    this.showMessage = true;
+    setTimeout(() => {
+      this.showMessage = false;
+      this.message = ""
+    }, 1000); // 3 секунды
+
+  }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -309,7 +320,8 @@ export class ProductPage {
       let buyProductDTO = new BuyProductDTO("", this.productId!, this.auth.user.id, "", this.data?.price!)
 
       this.buyService.setBuyProduct(buyProductDTO).subscribe(res => {
-
+        this.message = "Покупка прошла успешно"
+        this.showTempMessage()
       },
         error => {
           if (error.error === 'Token expired' || error.message?.includes('Token expired')) {
@@ -325,6 +337,10 @@ export class ProductPage {
                 console.log(error_.error.message);
                 this.auth.logout()
               })
+          }
+          else{
+            this.message = "Произошла ошибка"
+            this.showTempMessage()
           }
         })
 
