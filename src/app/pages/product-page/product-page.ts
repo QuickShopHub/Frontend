@@ -55,7 +55,7 @@ export class ProductPage {
   timeGrade : Date | null = null;
   buyService = inject(BuyService);
   isFavorite: boolean = false;
-
+  local_query = ""
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -80,6 +80,10 @@ export class ProductPage {
       console.log(localStorage.getItem('token'));
       console.log(localStorage.getItem('user_data'));
     });
+    if(localStorage.getItem("query") != null) {
+      //@ts-ignore
+      this.local_query = localStorage.getItem("query")
+    }
   }
 
   private favorite_status(){

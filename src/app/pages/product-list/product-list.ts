@@ -30,6 +30,7 @@ export class ProductList {
   auth = inject(AuthService)
   router = inject(Router);
   private queryParamsSubscription: Subscription | null = null;
+  local_query = ""
 
   ngOnInit(){
     // Обрабатываем начальные параметры
@@ -39,6 +40,10 @@ export class ProductList {
     this.queryParamsSubscription = this.route.queryParams.subscribe(params => {
       this.handleQueryParams(params);
     });
+    if(localStorage.getItem("query") != null) {
+      //@ts-ignore
+      this.local_query = localStorage.getItem("query")
+    }
   }
 
 

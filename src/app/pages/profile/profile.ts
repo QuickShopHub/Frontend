@@ -25,7 +25,7 @@ export class Profile {
   http = inject(HttpClient)
   showMessage: boolean = false;
   router =inject(Router);
-
+  local_query = ""
 
   showTempMessage() {
     this.showMessage = true;
@@ -37,7 +37,10 @@ export class Profile {
   }
 
   ngOnInit() {
-
+    if(localStorage.getItem("query") != null) {
+      //@ts-ignore
+      this.local_query = localStorage.getItem("query")
+    }
   }
 
 

@@ -15,7 +15,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class SearchField {
   router = inject(Router);
   auth = inject(AuthService);
-  isAuth = false;
   route: ActivatedRoute = inject(ActivatedRoute);
 
   @Input() searchText: string = "";
@@ -28,26 +27,13 @@ export class SearchField {
   query: string = "";
 
 
-  ngOnInit() {
 
-    this.isAuth = this.auth.token != null;
-    console.log("auth: "+this.isAuth)
-    if(!this.searchText){
-      this.searchText = ""
+  ngOnInit(): void {
+    if(this.searchText != undefined){
+      this.query = this.searchText
     }
-    this.route.queryParams.subscribe(params => {
-      this.query = params['query'];
-      if(!this.query){
-        if(localStorage.getItem("query") != null){
-          this.query = localStorage.getItem("query")!;
-        }
-      }
-      else{
-        this.query = ""
-      }
-    })
-    if (this.searchText) {
-      this.query = this.searchText;
+    else{
+      this.query = ""
     }
   }
 

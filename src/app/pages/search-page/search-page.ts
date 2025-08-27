@@ -26,6 +26,9 @@ export class SearchPage {
 
   searchQuery: string = "";
 
+  local_query: string = "";
+
+
   ngOnInit() {
     const strPage: string | null = localStorage.getItem("page")
     if(strPage != null){
@@ -40,6 +43,10 @@ export class SearchPage {
       this.search(query, this.page);
 
     });
+    if(localStorage.getItem("query") != null) {
+      //@ts-ignore
+      this.local_query = localStorage.getItem("query")
+    }
   }
 
   public search(query: string, page: number = 1): void {
