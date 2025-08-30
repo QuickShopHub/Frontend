@@ -12,7 +12,7 @@ export class CommentsService {
   auth = inject(AuthService)
 
   public sendComment(comment: NewCommentDTO) {
-    return  this.http.post<NewCommentDTO>("/comment/api/new_comment", comment, {
+    return  this.http.post<NewCommentDTO>("/commentsService/api/new_comment", comment, {
       headers: {
         "Authorization": `Bearer ${this.auth.token}`
       }
@@ -20,11 +20,11 @@ export class CommentsService {
   }
 
   public getAllComments(id: string) {
-    return this.http.get<CommentData[]>(`/comment/api/comments?id=${id}`);
+    return this.http.get<CommentData[]>(`/commentsService/api/comments?id=${id}`);
   }
 
   public deleteComment(id: string) {
-    return this.http.delete<CommentData[]>(`/comment/api/comments/${id}`, {
+    return this.http.delete<CommentData[]>(`/commentsService/api/comments/${id}`, {
       headers: {
         "Authorization": `Bearer ${this.auth.token}`
       }

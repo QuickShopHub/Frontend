@@ -8,7 +8,7 @@ export class PhotoService {
   http = inject(HttpClient)
 
   getPhotos(id: string){
-    return this.http.get<miniPhoto[]>(`/product/api/products/photo?id=${id}`)
+    return this.http.get<miniPhoto[]>(`/productService/api/products/photo?id=${id}`)
   }
 
 }

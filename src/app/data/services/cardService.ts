@@ -12,6 +12,6 @@ export class CardService {
 
   getProducts(query:string, page:number){
     const queryDTO = new QueryDTO(query, 24, page-1)
-    return this.http.post<ApiResponse>('/search/api/query', queryDTO)
+    return this.http.post<ApiResponse>('/searchService/api/query', queryDTO)
   }
 }

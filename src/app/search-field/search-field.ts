@@ -47,6 +47,7 @@ export class SearchField {
 
   backPage(){
     localStorage.removeItem("query")
+    window.location.reload()
     this.router.navigate(['/find'], {
       queryParams: { query: "" }
     });

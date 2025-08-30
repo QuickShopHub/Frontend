@@ -33,11 +33,11 @@ export class AuthService {
   }
 
   public signin(payload: {email: string, password: string}){
-    return  this.http.post<UserAuth>('/user/api/auth/login', payload)
+    return  this.http.post<UserAuth>('/userService/api/auth/login', payload)
   }
 
   public signup(payload: {email: string, password: string, username: string}) {
-    return this.http.post<UserAuth>('/user/api/auth/signup', payload);
+    return this.http.post<UserAuth>('/userService/api/auth/signup', payload);
   }
 
   public logout() {
@@ -47,7 +47,7 @@ export class AuthService {
     localStorage.removeItem('user_data');
     this.token = null;
     this.user = null;
-    this.http.post('/user/api/auth/logout', {}, { withCredentials: true } ).subscribe(
+    this.http.post('/userService/api/auth/logout', {}, { withCredentials: true } ).subscribe(
       () => {
 
       }
@@ -55,7 +55,7 @@ export class AuthService {
   }
 
   public refreshToken() {
-    return this.http.post<UserAuth>('/user/api/auth/refresh', {})
+    return this.http.post<UserAuth>('/userService/api/auth/refresh', {})
   }
 
 

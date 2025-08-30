@@ -52,7 +52,6 @@ export class ProductPage {
   admin = false;
   rating = 0
   updateRatingService = inject(RatingService);
-  timeGrade : Date | null = null;
   buyService = inject(BuyService);
   isFavorite: boolean = false;
   local_query = ""
@@ -84,10 +83,7 @@ export class ProductPage {
           this.rating = res.grade
         })
       }
-      const storedTime: string | null = localStorage.getItem(`grade${this.productId}`);
-      if(storedTime){
-        this.timeGrade = new Date(storedTime)
-      }
+
       console.log(localStorage.getItem('token'));
       console.log(localStorage.getItem('user_data'));
     });
@@ -126,7 +122,7 @@ export class ProductPage {
     this.urlAvatar = url;
     this.url = url
 
-    this.http.get<ForCustomer[]>(`/product/api/products/id?id=${id}`).subscribe(res => {
+    this.http.get<ForCustomer[]>(`/productService/api/products/id?id=${id}`).subscribe(res => {
       this.data = res[0];
       this.addPhotos(this.data.id)
       if(this.auth.user != null) {
@@ -197,7 +193,7 @@ export class ProductPage {
   }
 
   deleteProduct() {
-    this.http.delete<string>(`/product/api/products?id=${this.productId}`, {
+    this.http.delete<string>(`/productService/api/products?id=${this.productId}`, {
       headers: {
         "Authorization": `Bearer ${this.auth.token}`
       },
@@ -228,11 +224,10 @@ export class ProductPage {
 
 
   star(index: number){
-    if(this.timeGrade == null || new Date().getTime() - this.timeGrade.getTime() > 60*1000 ) {
-      this.rating = index;
-      const ratingDto = new RatingDTO(this.productId!, this.auth.user?.id!, this.rating);
-      this.updateRatingService.setRating(ratingDto).subscribe(res => {
 
+    this.rating = index;
+    const ratingDto = new RatingDTO(this.productId!, this.auth.user?.id!, this.rating);
+    this.updateRatingService.setRating(ratingDto).subscribe(res => {
       }, error => {
         if (error.error === 'Token expired' || error.message?.includes('Token expired')) {
           this.auth.refreshToken().subscribe(
@@ -249,11 +244,10 @@ export class ProductPage {
             })
         }
 
-      })
-      this.timeGrade = new Date()
-      localStorage.setItem(`grade${this.productId}`, this.timeGrade.toString());
-    }
+    })
   }
+
+
   backPage(){
     localStorage.removeItem("query")
     this.router.navigate(['/find'], {

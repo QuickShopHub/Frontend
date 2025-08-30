@@ -79,7 +79,7 @@ export class Profile {
   onSubmit1(){
     if(this.form1.valid) {
       let form = new NameChange(this.form1.value.email!, this.form1.value.password!, this.form1.value.name!)
-      this.http.put<Responce>(`/user/api/user/username`, form, {
+      this.http.put<Responce>(`/userService/api/user/username`, form, {
         headers: {
           "Authorization": `Bearer ${this.auth.token}`
         }
@@ -130,7 +130,7 @@ export class Profile {
       }
 
       let form = new PasswordChange(this.form2.value.email!, this.form2.value.password!, this.form2.value.new_password1!)
-      this.http.put<Responce>(`/user/api/user/password`, form, {
+      this.http.put<Responce>(`/userService/api/user/password`, form, {
         headers: {
           "Authorization": `Bearer ${this.auth.token}`
         }
@@ -165,7 +165,7 @@ export class Profile {
   onSubmit3(){
     if(this.form3.valid) {
       let form = new EmailChange(this.form3.value.email!, this.form3.value.password!, this.form3.value.new_email!)
-      this.http.put<Responce>(`/user/api/user/email`, form, {
+      this.http.put<Responce>(`/userService/api/user/email`, form, {
         headers: {
           "Authorization": `Bearer ${this.auth.token}`
         }

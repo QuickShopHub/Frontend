@@ -66,7 +66,7 @@ export class CreateProduct {
 
       let result = new NewProductDTO(product, photos, avatar)
 
-      this.http.post<Product>('product/api/products', result, {
+      this.http.post<Product>('productService/api/products', result, {
         headers: {
           "Authorization": `Bearer ${this.auth.token}`
         }

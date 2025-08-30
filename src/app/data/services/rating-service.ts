@@ -11,11 +11,11 @@ export class RatingService {
   auth = inject(AuthService)
 
   getRating(idProduct:string, idUser: string){
-    return this.http.get<RatingDTO>(`/product/api/products/rating?product_id=${idProduct}&user_id=${idUser}`)
+    return this.http.get<RatingDTO>(`/productService/api/products/rating?product_id=${idProduct}&user_id=${idUser}`)
   }
 
   setRating(ratingDTO: RatingDTO) {
-    return this.http.post<RatingDTO>(`/product/api/products/rating`, ratingDTO, {
+    return this.http.post<RatingDTO>(`/productService/api/products/rating`, ratingDTO, {
       headers: {
         "Authorization": `Bearer ${this.auth.token}`
       }
